@@ -1,5 +1,5 @@
 USTH ICT 2025 Advanced Programming with Python
-=====================================================
+
 
 Students are expected to:
 * Fork this repository to your github account
@@ -7,7 +7,7 @@ Students are expected to:
 
 
 Student Info
-=========================
+
 
 * Student Name: Luong Quynh Nhi 
 * Student ID: 23BI14356
