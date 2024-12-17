@@ -5,9 +5,9 @@ import curses
 def get_valid_input(stdscr, prompt, input_type):
     """Get valid input from the user with curses interface"""
     curses.echo()
-    stdscr.clear()  # Clear the screen before showing prompt
+    stdscr.clear() 
     stdscr.addstr(prompt)
-    stdscr.refresh()  # Ensure the screen is refreshed to show the prompt
+    stdscr.refresh()  
     user_input = stdscr.getstr().decode()
     while True:
         try:
@@ -37,7 +37,7 @@ class Student:
         marks = np.array([self.marks[course] for course in course_names])
         credits = np.array([course.credits for course in courses if course.name in course_names])
 
-        if credits.size > 0:  # Avoid division by zero
+        if credits.size > 0:  
             weighted_sum = np.sum(marks * credits)
             total_credits = np.sum(credits)
             self.gpa = weighted_sum / total_credits
@@ -51,7 +51,7 @@ class Student:
         for course, marks in self.marks.items():
             stdscr.addstr(f"{course}: {marks}\n")
         stdscr.refresh()
-        stdscr.getch()  # Wait for a key press before continuing
+        stdscr.getch()  
 
 class Course:
     def __init__(self, course_id, name, credits):
@@ -64,48 +64,44 @@ class Course:
 
 
 def main(stdscr):
-    # Initialize curses
+ 
     curses.curs_set(0)
     stdscr.clear()
 
-    # Input students
+   
     num_students = get_valid_input(stdscr, "Enter the number of students: ", int)
     students = [Student(get_valid_input(stdscr, f"Enter student {i+1} ID: ", str),
                         get_valid_input(stdscr, f"Enter student {i+1} name: ", str),
                         get_valid_input(stdscr, f"Enter student {i+1} DOB: ", str)) for i in range(num_students)]
 
-    # Input courses
+   
     num_courses = get_valid_input(stdscr, "Enter the number of courses: ", int)
     courses = [Course(get_valid_input(stdscr, f"Enter course {i+1} ID: ", str),
                       get_valid_input(stdscr, f"Enter course {i+1} name: ", str),
                       get_valid_input(stdscr, f"Enter course {i+1} credits: ", int)) for i in range(num_courses)]
-
-    # Input marks for students in each course
+    
     for course in courses:
         for student in students:
             marks = get_valid_input(stdscr, f"Enter marks for {student.name} in {course.name}: ", float)
             course.add_student_marks(student, marks)
 
-    # Calculate GPAs
     for student in students:
         student.calculate_gpa(courses)
 
-    # Sort students by GPA (descending)
+   
     students = sorted(students, key=lambda s: s.gpa, reverse=True)
 
-    # Display sorted results
     stdscr.clear()
     stdscr.addstr("Sorted students by GPA:\n")
     for student in students:
         student.display_info(stdscr)
 
-    # Calculate and display average GPA
+    
     avg_gpa = np.mean([student.gpa for student in students])
     stdscr.clear()
     stdscr.addstr(f"Average GPA: {avg_gpa:.2f}\n")
     stdscr.refresh()
-    stdscr.getch()  # Wait for a key press before quitting
-
+    stdscr.getch()  
 
 if __name__ == "__main__":
     curses.wrapper(main)
