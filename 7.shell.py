@@ -8,7 +8,7 @@ def execute_command(command):
     if '|' in command:
         parts = command.split('|')
         processes = []
-        
+
         # Create the pipeline of processes
         for part in parts:
             cmd = part.strip().split()
