@@ -16,8 +16,6 @@ class Student:
         for course, marks in self.marks.items():
             print(f"{course}: {marks}")
 
-
-
 class Course:
     def __init__(self, course_id, name):
         self.course_id = course_id
@@ -33,7 +31,6 @@ class Course:
         print("Enrolled Students:")
         for student in self.students:
             student.display_info()
-
 
 
 def main():
