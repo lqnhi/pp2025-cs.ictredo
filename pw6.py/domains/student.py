@@ -1,4 +1,4 @@
-# pw5/domains/student.py
+# pw6/domains/student.py
 import math
 import numpy as np 
 
