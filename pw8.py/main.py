@@ -1,4 +1,4 @@
-# pw6/main.py
+# pw8/main.py
 import curses
 import os
 from input import get_valid_input, write_students_to_file, write_courses_to_file, write_marks_to_file
